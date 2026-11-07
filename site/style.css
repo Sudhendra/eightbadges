@@ -289,7 +289,7 @@ details[open] .toggle::after { content: "HIDE MOVES"; }
 .stats li { display: grid; grid-template-columns: 6.5em 3em 1fr; align-items: center; gap: 8px; }
 .stats i { height: 12px; background: var(--accent); width: calc(var(--v) * 100%); }
 .moves { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 2px 16px; }
-.moves li { display: grid; grid-template-columns: 3.5em 1fr auto; gap: 8px; }
+.moves li { display: grid; grid-template-columns: 3.5em 1fr auto; gap: 8px; align-items: baseline; }
 .moves li span:last-child { color: var(--muted); font-size: 16px; }
 .dexgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 6px; }
 .dexgrid a { display: grid; justify-items: center; text-decoration: none; font: 700 11px/1.2 var(--display); padding: 4px 2px; text-align: center; }
@@ -305,7 +305,7 @@ details[open] .toggle::after { content: "HIDE MOVES"; }
 
 /* Map */
 .region { display: grid; grid-template-columns: repeat(var(--cols), 1fr); grid-template-rows: repeat(var(--rows), 1fr); aspect-ratio: 28 / 15; gap: 1px; width: 100%; background: color-mix(in srgb, #3a78d6 22%, var(--paper)); padding: 4px; }
-.area { display: block; min-width: 0; min-height: 0; transition: opacity .2s steps(2); }
+.area { display: block; min-width: 0; min-height: 0; }
 .area.sea { background: color-mix(in srgb, #3a78d6 55%, var(--paper)); }
 .area.route { background: color-mix(in srgb, var(--easy) 55%, var(--paper)); }
 .area.town { background: var(--ink); z-index: 1; }
@@ -326,6 +326,8 @@ a.area:hover, a.area:focus { outline: var(--px) solid var(--tough); outline-offs
 .place-hero { display: grid; grid-template-columns: 1fr minmax(200px, 320px); gap: 16px; align-items: center; margin: 8px 0; }
 .place-hero h1 { font: 700 clamp(26px, 7vw, 44px)/1 var(--display); text-shadow: 3px 3px 0 var(--accent); margin: 4px 0; }
 @media (max-width: 640px) { .place-hero { grid-template-columns: 1fr; } }
-.wild { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 4px 12px; }
-.wild li { display: grid; grid-template-columns: 64px 1fr auto auto; align-items: center; gap: 8px; }
-.wild li > a:nth-child(2) { font: 700 14px/1.2 var(--display); }
+.wild { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 4px 12px; }
+.wild li { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 8px; }
+.wild-text { display: grid; gap: 2px; }
+.wild-text a { font: 700 14px/1.2 var(--display); }
+.wild-text small { color: var(--muted); font-size: 18px; }

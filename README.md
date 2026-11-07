@@ -1,6 +1,10 @@
 # Eight Badges
 
-Pick your starter and see your whole road to Champion in Pokémon Emerald: every gym, rival and boss, with real teams and how you match up.
+Pick your starter and see your whole road to Champion in Pokémon Emerald: every gym, rival and boss, with real teams, how you match up, and what to catch before each fight.
+
+- **Foresight:** what to catch before each fight, favoring Pokémon that cover your starter's weak spots, plus how one-time choices like the fossils play out.
+- **Map:** Hoenn drawn from the game's own region map, with a "where can I go before…" view for every gym.
+- **Where to find everything:** a page for every Pokémon, place, TM, HM and ability, each saying when you can first reach it.
 
 **[eightbadges.com](https://eightbadges.com)**
 

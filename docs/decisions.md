@@ -31,10 +31,18 @@ Feel and speed outrank features. The site should be very lean, load extremely fa
 - **Showdown replaces PokeAPI as the cross-check.** Its data is specific to Gen 3, so it's the stronger test.
 - **Facts only.** No dialogue or item, move or ability descriptions. Guide text gets written from scratch.
 
+## Foresight
+
+- **Picks are explainable, not magic.** Each pick scores for its type matchup in the next fight, how much it covers the coming fights where your starter struggles, and raw strength. Abilities that cripple a Pokémon, like Truant, count against it.
+- **Assumptions are stated on the page:** a pick is raised to each fight's level, with level-up moves and level-up evolutions only.
+- **Story progress is hand-written and conservative.** Each stop lists what it opens. When unsure, an area opens later, so Foresight never suggests something you can't reach.
+- **One-time choices are weighed against every fight left** for your starter.
+
 ## Known data gaps
 
 - **Move behavior:** stored accuracy, priority or power values differ from Showdown for 32 moves. The simulator must confirm how each behaves in battle.
-- **Story gates:** map connections ignore HMs, badges and story events. Those need a hand-built layer, which also powers "how do I get out of here?".
+- **Story gates:** what each stop opens is tracked by region map section, not by individual map, so a few areas are marked open later than the game allows. "How do I get out of here?" pathfinding still needs gates on individual connections.
+- **Foresight's limits:** picks don't consider TMs, stone evolutions, held items or team synergy yet.
 - **Trainer details:** natures and money rewards aren't extracted yet, and AI flags aren't connected to any behavior yet.
 - **Item sources:** based on what scripts reference. They don't yet say when an item becomes available, or its cost in coins or points.
 - **Reachability:** 47 maps entered through game systems, such as secret bases and Pyramid floors, don't connect in the graph. A test lists which ones are expected.

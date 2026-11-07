@@ -43,7 +43,7 @@ function checkpointCss(checkpoints: number[]): string {
   return checkpoints
     .map((index) => {
       const open = Array.from({ length: index + 1 }, (_, i) => `.u${i}`).join(",");
-      return `.mapview:has(#at${index}:checked) .area:not(${open}){opacity:.16}`;
+      return `.mapview:has(#at${index}:checked) .region .area:not(${open}){opacity:.16}`;
     })
     .join("");
 }
@@ -82,7 +82,7 @@ export function renderMap(kit: Kit): string {
       ${regionMap(kit, { linked: true })}
       <p class="legend"><i class="area town"></i>TOWN <i class="area route"></i>ROUTE <i class="area sea"></i>SEA <i class="area dungeon"></i>CAVE &amp; MORE</p>
       ${list("TOWNS & CITIES", groups.town)}
-      ${list("ROUTES", [...groups.route, ...groups.sea])}
+      ${list("ROUTES & THE OUTDOORS", [...groups.route, ...groups.sea])}
       ${list("CAVES, TOWERS & MORE", groups.dungeon)}
     </main>`,
   );
@@ -137,13 +137,13 @@ export function renderPlace(kit: Kit, section: string): string {
         <h2>WILD POKÉMON</h2>
         ${[...byMethod].map(([method, table]) => html`<h3 class="sub">${METHOD_LABEL[method]}</h3>
           <ul class="wild">${[...table].sort((a, b) => b[1].chance - a[1].chance).map(([species, row]) =>
-            html`<li><a href="/pokemon/${species}/">${sprite(species)}</a>${speciesLink(species)}<span>Lv ${row.min === row.max ? row.min : `${row.min}–${row.max}`}</span><span>${row.chance}%</span></li>`,
+            html`<li><a href="/pokemon/${species}/">${sprite(species)}</a><span class="wild-text">${speciesLink(species)}<small>Lv ${row.min === row.max ? row.min : `${row.min}–${row.max}`} · ${row.chance}%</small></span></li>`,
           )}</ul>`)}
       </section>` : ""}
 
       ${mons.length ? html`<section class="panel">
         <h2>SPECIAL POKÉMON</h2>
-        <ul class="wild">${mons.map(([species, level]) => html`<li><a href="/pokemon/${species}/">${sprite(species)}</a>${speciesLink(species)}<span>Lv ${level}</span></li>`)}</ul>
+        <ul class="wild">${mons.map(([species, level]) => html`<li><a href="/pokemon/${species}/">${sprite(species)}</a><span class="wild-text">${speciesLink(species)}<small>Lv ${level}</small></span></li>`)}</ul>
       </section>` : ""}
 
       ${items.length ? html`<section class="panel">

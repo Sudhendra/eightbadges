@@ -6,7 +6,10 @@ Thanks for being here! Whether you've spotted a wrong note or want to build a wh
 
 Spot something wrong on the site? You can [report it](https://github.com/Sudhendra/eightbadges/issues/new/choose) without touching any code.
 
-Comfortable editing a file? All the story stops live in [`content/emerald/journey.json`](content/emerald/journey.json). You can fix the order, reword a note, or add a missing boss there, and the tests will catch most mistakes.
+Comfortable editing a file? The story lives in two plain JSON files, and the tests catch most mistakes:
+
+- [`content/emerald/journey.json`](content/emerald/journey.json) holds every fight on the road, in order. Each stop also lists the areas and tools (rods, Surf and so on) that open up before it. Foresight, the map and every "open before" label come from those lists.
+- [`content/emerald/forks.json`](content/emerald/forks.json) holds one-time choices, like the Root or Claw fossil.
 
 ## Get it running
 
@@ -28,8 +31,10 @@ The dev server restarts when files in `site/` or `content/` change, but you need
 
 | Path | What's in it | Edit by hand? |
 |---|---|---|
-| `content/emerald/` | The story path and its notes | Yes |
-| `site/` | Pages, styles, matchup logic and the build | Yes |
+| `content/emerald/` | The story path, what each stop opens, and one-time choices | Yes |
+| `site/pages/` | One file per kind of page: road, Pokémon, map, places, TMs | Yes |
+| `site/lib/` | Matchups, story progress, and Foresight's picks | Yes |
+| `site/style.css`, `site/client.js` | All the styling and the little bit of JS | Yes |
 | `pipeline/` | Extracts game data from the decomp | Yes |
 | `data/emerald/` | Generated game data | No, run `pnpm data` |
 
@@ -80,8 +85,10 @@ How the site feels matters more than how many features it has.
 ## Good first projects
 
 - Check a road against your own playthrough and report anything that feels wrong.
+- Know an area opens earlier than the site says? Move it to the right stop in `journey.json`. We open areas late when unsure, so this is common.
 - Add a missing story fight to `journey.json`, such as Tabitha at Mt. Chimney.
 - Improve a stop's note. Accurate, short and funny is the goal.
+- Write short, original descriptions for abilities. We can't copy the game's, so the abilities page doesn't have any yet.
 
 See [project decisions](docs/decisions.md) for known gaps and bigger ideas. For anything large, please open an issue first, so we can agree on the approach before you spend time on it.
 
