@@ -331,3 +331,6 @@ a.area:hover, a.area:focus { outline: var(--px) solid var(--tough); outline-offs
 .wild-text { display: grid; gap: 2px; }
 .wild-text a { font: 700 14px/1.2 var(--display); }
 .wild-text small { color: var(--muted); font-size: 18px; }
+
+/* Home already shows the menu under the starters. */
+.home .foot .sitenav { display: none; }
