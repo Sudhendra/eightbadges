@@ -9,12 +9,20 @@
     "data:fetch": "bash pipeline/fetch-decomp.sh",
     "data:build": "node pipeline/build.ts",
     "data": "pnpm data:fetch && pnpm data:build",
-    "test": "node --test \"pipeline/test/*.test.ts\"",
-    "typecheck": "tsc --noEmit"
+    "test": "node --test \"pipeline/test/*.test.ts\" \"site/test/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "dev": "node --watch-path=site --watch-path=content site/dev.ts",
+    "build": "node site/build.ts",
+    "deploy": "pnpm build && pnpm dlx wrangler deploy"
   },
   "devDependencies": {
+    "@fontsource/pixelify-sans": "^5.3.0",
+    "@fontsource/press-start-2p": "^5.3.0",
+    "@fontsource/silkscreen": "^5.3.0",
+    "@fontsource/vt323": "^5.3.0",
     "@pkmn/dex": "^0.10.15",
     "@types/node": "22",
     "typescript": "^7.0.2"
-  }
+  },
+  "packageManager": "pnpm@9.12.0"
 }
