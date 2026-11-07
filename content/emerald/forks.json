@@ -1,0 +1,14 @@
+[
+  {
+    "id": "fossil",
+    "after": "norman",
+    "title": "ROOT OR CLAW?",
+    "place": "Mirage Tower",
+    "section": "mirage_tower",
+    "note": "Two fossils sit at the top of the tower. Take one and the other is lost for good. Devon Corp in Rustboro brings it back to life.",
+    "options": [
+      { "label": "ROOT FOSSIL", "species": "lileep", "level": 20 },
+      { "label": "CLAW FOSSIL", "species": "anorith", "level": 20 }
+    ]
+  }
+]

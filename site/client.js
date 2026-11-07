@@ -37,21 +37,22 @@
   });
 
   const move = (step) => {
+    if (!nav.length) return false;
     const current = nav.indexOf(document.activeElement);
     const next = current < 0 ? (step > 0 ? 0 : nav.length - 1) : (current + step + nav.length) % nav.length;
     nav[next].focus({ preventScroll: true });
     nav[next].scrollIntoView({ block: "center" });
     blip(440);
+    return true;
   };
 
   addEventListener("keydown", (event) => {
     if (event.metaKey || event.ctrlKey || event.altKey) return;
+    if (event.target.closest?.("input, textarea, select")) return;
     if (event.key === "ArrowRight" || event.key === "ArrowDown" || event.key === "j") {
-      event.preventDefault();
-      move(1);
+      if (move(1)) event.preventDefault();
     } else if (event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "k") {
-      event.preventDefault();
-      move(-1);
+      if (move(-1)) event.preventDefault();
     } else if (event.key === "Escape") {
       document.querySelector("[data-home]")?.click();
     } else if (event.key === "Enter" && nav.includes(document.activeElement)) {

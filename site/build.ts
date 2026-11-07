@@ -4,7 +4,6 @@ import { gzipSync } from "node:zlib";
 import { spritePath, spriteSourceUrl } from "./lib/sprites.ts";
 import { DEV_FONTS, FONTS, renderAll } from "./render.ts";
 
-const OUT = "dist";
 const SPRITE_CACHE = ".cache/sprites";
 const PNG_SIGNATURE = "89504e470d0a1a0a";
 
@@ -25,43 +24,45 @@ async function cachedSprite(dex: number): Promise<string> {
   return path;
 }
 
-function write(path: string, contents: string): void {
-  const full = join(OUT, path);
+function write(out: string, path: string, contents: string): void {
+  const full = join(out, path);
   mkdirSync(dirname(full), { recursive: true });
   writeFileSync(full, contents);
 }
 
-function copy(from: string, to: string): void {
-  const full = join(OUT, to);
+function copy(out: string, from: string, to: string): void {
+  const full = join(out, to);
   mkdirSync(dirname(full), { recursive: true });
   copyFileSync(from, full);
 }
 
+/** Production builds go to dist/. The dev server builds to its own folder so the two never collide. */
+export const outDir = (dev: boolean): string => (dev ? ".cache/dev-site" : "dist");
+
 export async function build(options: { dev: boolean }): Promise<void> {
+  const OUT = outDir(options.dev);
   const site = renderAll(options);
   rmSync(OUT, { recursive: true, force: true });
   mkdirSync(SPRITE_CACHE, { recursive: true });
 
-  for (const [path, html] of Object.entries(site.pages)) write(path, html);
-  write("_headers", HEADERS);
+  for (const [path, html] of Object.entries(site.pages)) write(OUT, path, html);
+  write(OUT, "_headers", HEADERS);
 
-  for (const [to, from] of Object.entries(options.dev ? { ...FONTS, ...DEV_FONTS } : FONTS)) copy(from, to);
+  for (const [to, from] of Object.entries(options.dev ? { ...FONTS, ...DEV_FONTS } : FONTS)) copy(OUT, from, to);
 
   const dexes = [...site.sprites].sort((a, b) => a - b);
   for (let i = 0; i < dexes.length; i += 12) {
     await Promise.all(
       dexes.slice(i, i + 12).map(async (dex) => {
         const from = await cachedSprite(dex);
-        copy(from, spritePath(dex));
+        copy(OUT, from, spritePath(dex));
       }),
     );
   }
 
-  for (const path of Object.keys(site.pages)) {
-    const text = readFileSync(join(OUT, path));
-    console.log(`${path.padEnd(22)} ${String(text.length).padStart(7)} B  ${String(gzipSync(text, { level: 9 }).length).padStart(6)} B gzip`);
-  }
-  console.log(`${dexes.length} sprites`);
+  const sizes = Object.keys(site.pages).map((path) => ({ path, gzip: gzipSync(readFileSync(join(OUT, path)), { level: 9 }).length }));
+  const largest = sizes.sort((a, b) => b.gzip - a.gzip).slice(0, 3).map((page) => `${page.path} ${page.gzip} B`).join(", ");
+  console.log(`${sizes.length} pages, ${dexes.length} sprites. Largest gzipped: ${largest}`);
 }
 
 if (import.meta.main) await build({ dev: false });

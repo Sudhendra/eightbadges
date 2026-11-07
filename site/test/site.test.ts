@@ -10,7 +10,7 @@ const site = renderAll({ dev: false });
 
 /** 14 KB is about what arrives in the first network round trip, so the first screen shows up immediately. */
 const FIRST_SCREEN_GZIP_BUDGET = 14_000;
-const ROAD_PAGE_GZIP_BUDGET = 16_000;
+const PAGE_GZIP_BUDGET = 16_000;
 
 const stopNamed = (id: string) => data.journey.find((stop) => stop.id === id)!;
 
@@ -101,10 +101,33 @@ test("every road covers every stop", () => {
 test("pages fit their size budgets, with all CSS and JS included", () => {
   const size = (path: string) => gzipSync(site.pages[path]!, { level: 9 }).length;
   assert.ok(size("index.html") <= FIRST_SCREEN_GZIP_BUDGET, `Home is ${size("index.html")} B gzipped`);
-  for (const starter of STARTERS) {
-    const path = `${starter}/index.html`;
-    assert.ok(size(path) <= ROAD_PAGE_GZIP_BUDGET, `${path} is ${size(path)} B gzipped`);
+  for (const path of Object.keys(site.pages)) {
+    assert.ok(size(path) <= PAGE_GZIP_BUDGET, `${path} is ${size(path)} B gzipped`);
   }
+});
+
+test("every internal link and anchor points at something that exists", () => {
+  const ids = new Map<string, Set<string>>();
+  for (const [path, page] of Object.entries(site.pages)) {
+    const url = "/" + path.replace(/index\.html$/, "");
+    ids.set(url, new Set([...page.matchAll(/ id="([^"]+)"/g)].map((match) => match[1]!)));
+  }
+  const broken: string[] = [];
+  for (const [path, page] of Object.entries(site.pages)) {
+    const from = "/" + path.replace(/index\.html$/, "");
+    for (const match of page.matchAll(/ href="(\/[^"]*|#[^"]+)"/g)) {
+      const [target, anchor] = match[1]!.startsWith("#") ? [from, match[1]!.slice(1)] : match[1]!.split("#");
+      if (target!.startsWith("/f/") || target!.startsWith("/s/")) continue;
+      if (!ids.has(target!)) broken.push(`${from} -> ${match[1]}`);
+      else if (anchor && !ids.get(target!)!.has(anchor)) broken.push(`${from} -> ${match[1]} (no anchor)`);
+    }
+  }
+  assert.deepEqual(broken.slice(0, 20), []);
+});
+
+test("there is a page for every Pokémon and every place on the map", () => {
+  for (const id of data.species.keys()) assert.ok(site.pages[`pokemon/${id}/index.html`], id);
+  for (const stop of data.journey) assert.ok(site.pages[`places/${stop.section}/index.html`], stop.section);
 });
 
 test("pages load nothing from other sites, and images reserve their space", () => {
