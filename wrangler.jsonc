@@ -1,0 +1,12 @@
+{
+  "name": "eightbadges",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "eightbadges.com", "custom_domain": true },
+    { "pattern": "www.eightbadges.com", "custom_domain": true }
+  ]
+}

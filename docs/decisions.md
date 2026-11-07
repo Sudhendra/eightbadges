@@ -15,8 +15,15 @@ Feel and speed outrank features. The site should be very lean, load extremely fa
 
 - Pages load only the data they use.
 - Every data file has a gzip budget, enforced by tests in `pipeline/config.ts`.
-- Pipeline code has no runtime dependencies.
-- Fonts get decided iteratively, by trying them on the real site.
+- No framework. Pages are static HTML from a small build script, with CSS and JS inlined so the first screen arrives in one round trip.
+- Pipeline and site code have no runtime dependencies.
+- Fonts: Silkscreen for headings and VT323 for body, self-hosted. Pixelify Sans was dropped because its "C" reads as "O" at small sizes. Still open to change: press F on the dev site to compare.
+
+## Open source
+
+- Code is MIT licensed. Pokémon's names, characters and sprites stay with their owners.
+- Sprites are never committed to git. The build fetches them from a pinned PokeAPI/sprites commit, and only those in use.
+- Story content lives in one plain JSON file, so fans can fix it without touching code.
 
 ## Data
 

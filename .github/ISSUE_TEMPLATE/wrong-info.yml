@@ -1,0 +1,22 @@
+name: Wrong game info
+description: Something on the site doesn't match the game
+labels: ["data"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where on the site?
+      description: A link or page, like "Mudkip's road, Winona".
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What's wrong, and what should it say?
+    validations:
+      required: true
+  - type: textarea
+    id: how
+    attributes:
+      label: How do you know?
+      description: For example, you saw it in your playthrough, or a link to a source. Please don't share ROMs or links to them.

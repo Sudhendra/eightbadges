@@ -1,0 +1,10 @@
+name: Idea or bug
+description: Suggest something, or report something broken
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What's on your mind?
+      description: For a bug, tell us what you did, what you expected, and your device and browser.
+    validations:
+      required: true
