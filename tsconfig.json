@@ -16,6 +16,7 @@
   },
   "include": [
     "pipeline",
-    "site"
+    "site",
+    "shared"
   ]
 }

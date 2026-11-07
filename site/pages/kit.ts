@@ -68,7 +68,7 @@ export function createKit(data: GameData, assets: Assets) {
     )}</span>`;
 
   const nav = (): Markup =>
-    html`<nav class="sitenav" aria-label="Site"><a href="/map/">MAP</a><a href="/pokemon/">POKÉMON</a><a href="/tms/">TMS &amp; HMS</a><a href="/abilities/">ABILITIES</a></nav>`;
+    html`<nav class="sitenav" aria-label="Site"><a href="/planner/">PLANNER</a><a href="/map/">MAP</a><a href="/pokemon/">POKÉMON</a><a href="/tms/">TMS &amp; HMS</a><a href="/abilities/">ABILITIES</a></nav>`;
 
   /** A sticky top bar with a way home, for every page except home. */
   const bar = (label: string, extra: Markup | string = ""): Markup =>

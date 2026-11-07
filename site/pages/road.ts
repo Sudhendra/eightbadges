@@ -140,6 +140,7 @@ export function renderRoad(kit: Kit, starter: Starter): string {
         <h1>${mon.name}'S ROAD</h1>
         <p class="tally">${tally(entries)}</p>
         ${strip(entries, true)}
+        <p class="cta"><a href="/planner/#${starter}">PLAN YOUR TEAM FOR THIS ROAD</a></p>
         <p class="method">Ratings use type matchups at the opponent's level, with level-up moves only. Foresight picks favor Pokémon that cover the fights your starter struggles with. It's a guide, not a battle sim. Rival teams shown are May's. Brendan's are the same or nearly so.</p>
       </header>
       <ol class="stops">${entries.map((entry, index) => stopCard(entry, index))}</ol>

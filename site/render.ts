@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { stripTypeScriptTypes } from "node:module";
 import { loadGameData } from "./lib/data.ts";
 import { type Assets, renderSite, type Site } from "./pages.ts";
 
@@ -62,5 +63,9 @@ export function renderAll(options: { dev: boolean }): Site {
     fonts: Object.keys(FONTS),
     devHead: options.dev ? DEV_HEAD : "",
   };
-  return renderSite(loadGameData(), assets);
+  const site = renderSite(loadGameData(), assets);
+  // The browser runs the same engine as the build, with types stripped. No bundler needed.
+  site.files["planner/engine.js"] = stripTypeScriptTypes(readFileSync("shared/engine.ts", "utf8"));
+  site.files["planner/app.js"] = readFileSync("site/planner.js", "utf8");
+  return site;
 }

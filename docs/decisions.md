@@ -38,6 +38,14 @@ Feel and speed outrank features. The site should be very lean, load extremely fa
 - **Story progress is hand-written and conservative.** Each stop lists what it opens. When unsure, an area opens later, so Foresight never suggests something you can't reach.
 - **One-time choices are weighed against every fight left** for your starter.
 
+## Team planner
+
+- **One engine everywhere.** `shared/engine.ts` has no imports. The build strips its types for the browser, and a test checks the browser copy gives identical answers.
+- **Teams are rated on their weakest link.** EASY means every opponent has a clear answer on your team, TOUGH means one has none. Averages hid the gaps that matter.
+- **Members join when you can first catch them, and TMs count once you can get them.** TM moves take priority over level-up moves, four moves at most.
+- **The team lives in the URL hash**, like `#mudkip+tm_ice_beam,lotad,sableye`. That makes every team a shareable link, and it's the starting point for route sharing.
+- **Only the planner page loads JavaScript and data.** About 6 KB of code and 43 KB of data, gzipped.
+
 ## Known data gaps
 
 - **Move behavior:** stored accuracy, priority or power values differ from Showdown for 32 moves. The simulator must confirm how each behaves in battle.

@@ -11,7 +11,7 @@
     "data": "pnpm data:fetch && pnpm data:build",
     "test": "node --test \"pipeline/test/*.test.ts\" \"site/test/*.test.ts\"",
     "typecheck": "tsc --noEmit",
-    "dev": "node --watch-path=site --watch-path=content site/dev.ts",
+    "dev": "node --watch-path=site --watch-path=content --watch-path=shared site/dev.ts",
     "build": "node site/build.ts",
     "deploy": "pnpm build && pnpm dlx wrangler deploy"
   },

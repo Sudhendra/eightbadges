@@ -1,8 +1,10 @@
 import { type GameData, STARTERS } from "./lib/data.ts";
+import { plannerData } from "./lib/planner.ts";
 import { html } from "./lib/html.ts";
 import { renderHome } from "./pages/home.ts";
 import { type Assets, createKit } from "./pages/kit.ts";
 import { renderMap, renderPlace } from "./pages/map.ts";
+import { renderPlanner } from "./pages/planner.ts";
 import { renderPokemon, renderPokemonIndex } from "./pages/pokemon.ts";
 import { renderAbilities, renderMachines } from "./pages/reference.ts";
 import { renderRoad } from "./pages/road.ts";
@@ -11,6 +13,8 @@ export type { Assets };
 
 export type Site = {
   pages: Record<string, string>;
+  /** Non-page files to publish, such as the planner's data. */
+  files: Record<string, string>;
   /** Dex numbers of every sprite the pages use. */
   sprites: Set<number>;
 };
@@ -27,9 +31,13 @@ export function renderSite(data: GameData, assets: Assets): Site {
     "pokemon/index.html": renderPokemonIndex(kit),
     "tms/index.html": renderMachines(kit),
     "abilities/index.html": renderAbilities(kit),
+    "planner/index.html": renderPlanner(kit),
   };
   for (const starter of STARTERS) pages[`${starter}/index.html`] = renderRoad(kit, starter);
   for (const species of data.species.keys()) pages[`pokemon/${species}/index.html`] = renderPokemon(kit, species);
   for (const section of data.world.sections) pages[`places/${section.id}/index.html`] = renderPlace(kit, section.id);
-  return { pages, sprites: kit.sprites };
+  // The planner can show any Pokémon, so every sprite ships.
+  for (const mon of data.species.values()) kit.sprites.add(mon.dex);
+  const files = { "planner/data.json": JSON.stringify(plannerData(data, kit.progress)) };
+  return { pages, files, sprites: kit.sprites };
 }

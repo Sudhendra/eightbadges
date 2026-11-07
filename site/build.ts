@@ -46,6 +46,7 @@ export async function build(options: { dev: boolean }): Promise<void> {
   mkdirSync(SPRITE_CACHE, { recursive: true });
 
   for (const [path, html] of Object.entries(site.pages)) write(OUT, path, html);
+  for (const [path, contents] of Object.entries(site.files)) write(OUT, path, contents);
   write(OUT, "_headers", HEADERS);
 
   for (const [to, from] of Object.entries(options.dev ? { ...FONTS, ...DEV_FONTS } : FONTS)) copy(OUT, from, to);

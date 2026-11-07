@@ -2,6 +2,7 @@
 
 Pick your starter and see your whole road to Champion in Pokémon Emerald: every gym, rival and boss, with real teams, how you match up, and what to catch before each fight.
 
+- **Team planner:** pick your six and hand out your TMs, and every fight re-rates for the team you'll actually have by then. Your team lives in the link, so you can share it.
 - **Foresight:** what to catch before each fight, favoring Pokémon that cover your starter's weak spots, plus how one-time choices like the fossils play out.
 - **Map:** Hoenn drawn from the game's own region map, with a "where can I go before…" view for every gym.
 - **Where to find everything:** a page for every Pokémon, place, TM, HM and ability, each saying when you can first reach it.

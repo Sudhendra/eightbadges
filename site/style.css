@@ -334,3 +334,29 @@ a.area:hover, a.area:focus { outline: var(--px) solid var(--tough); outline-offs
 
 /* Home already shows the menu under the starters. */
 .home .foot .sitenav { display: none; }
+
+/* Planner */
+.cta a { display: inline-block; padding: 6px 12px; font: 700 15px/1.2 var(--display); background: var(--accent); color: var(--paper); text-decoration: none; }
+.cta a:hover, .cta a:focus-visible { background: var(--ink); }
+.starter-switch { display: flex; gap: 10px; margin-bottom: 8px; }
+.starter-switch button, .actions button, .chip, .remove { font: 700 13px/1.2 var(--display); color: var(--ink); background: var(--card); border: 0; box-shadow: 0 0 0 2px var(--ink); cursor: pointer; padding: 6px 10px; }
+.starter-switch button { display: grid; justify-items: center; padding: 4px 10px 8px; }
+.starter-switch button[aria-pressed="true"] { background: color-mix(in srgb, var(--accent) 22%, var(--card)); box-shadow: 0 0 0 3px var(--accent); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.actions button:hover, .chip:hover, .remove:hover { background: color-mix(in srgb, var(--accent) 18%, var(--card)); }
+.team-slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.member { position: relative; display: grid; grid-template-columns: 64px 1fr; gap: 8px; align-items: start; padding: 8px; background: var(--card); box-shadow: 0 0 0 2px var(--ink); }
+.member.empty { display: flex; align-items: center; min-height: 80px; box-shadow: 0 0 0 2px var(--muted); background: transparent; }
+.member-text { display: grid; gap: 4px; min-width: 0; padding-right: 22px; }
+.member-text b { font: 700 15px/1.2 var(--display); }
+.member-text small { color: var(--muted); font-size: 17px; }
+.tms { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-size: 11px; padding: 3px 6px; }
+.member select, .member.empty select { font: 400 18px/1.2 var(--body); color: var(--ink); background: var(--paper); border: 2px solid var(--ink); padding: 3px 4px; width: 100%; min-width: 0; }
+.member.empty select { width: 100%; }
+.remove { position: absolute; top: 6px; right: 6px; padding: 2px 6px; }
+.compare p { margin: 4px 0; }
+.plan-line { font-size: 18px; color: var(--muted); }
+.plan-line b { color: var(--ink); font-weight: 400; }
+.planner .stop .rows { padding: 10px 12px 4px; }
+.planner .stop .assume { padding: 0 12px 10px; }

@@ -9,6 +9,8 @@ const TYPES: Record<string, string> = {
   ".png": "image/png",
   ".woff2": "font/woff2",
   ".css": "text/css",
+  ".js": "text/javascript; charset=utf-8",
+  ".json": "application/json",
 };
 
 await build({ dev: true });

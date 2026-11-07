@@ -1,4 +1,5 @@
 import { bitFlags, braceGroups, designated, field, gameText, intField, requireField, slug, stripComments } from "../lib/c.ts";
+import { initialMoves } from "../../shared/engine.ts";
 import type { Learnset, Read } from "./pokemon.ts";
 
 export type TrainerMon = {
@@ -22,20 +23,8 @@ export type Trainer = {
   party: TrainerMon[];
 };
 
-/**
- * The moves a Pokémon knows when created at a level, matching GiveBoxMonInitialMoveset:
- * walk the learnset in order, skip moves already known, and drop the oldest move when full.
- */
-export function initialMoves(level: number, learnset: [number, string][]): string[] {
-  const moves: string[] = [];
-  for (const [moveLevel, move] of learnset) {
-    if (moveLevel > level) break;
-    if (moves.includes(move)) continue;
-    if (moves.length === 4) moves.shift();
-    moves.push(move);
-  }
-  return moves;
-}
+/** Shared with the site and the browser, so trainer movesets and matchups use one definition. */
+export { initialMoves };
 
 function extractParties(source: string, learnsets: Record<string, Learnset>): Map<string, TrainerMon[]> {
   const parties = new Map<string, TrainerMon[]>();

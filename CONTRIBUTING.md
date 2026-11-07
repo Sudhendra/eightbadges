@@ -33,7 +33,9 @@ The dev server restarts when files in `site/` or `content/` change, but you need
 |---|---|---|
 | `content/emerald/` | The story path, what each stop opens, and one-time choices | Yes |
 | `site/pages/` | One file per kind of page: road, Pokémon, map, places, TMs | Yes |
-| `site/lib/` | Matchups, story progress, and Foresight's picks | Yes |
+| `shared/engine.ts` | The matchup engine. The build, the tests and the browser all run this one file | Yes, carefully |
+| `site/lib/` | Story progress, Foresight's picks, and the planner's data | Yes |
+| `site/planner.js` | The team planner, the only page with real JavaScript | Yes |
 | `site/style.css`, `site/client.js` | All the styling and the little bit of JS | Yes |
 | `pipeline/` | Extracts game data from the decomp | Yes |
 | `data/emerald/` | Generated game data | No, run `pnpm data` |

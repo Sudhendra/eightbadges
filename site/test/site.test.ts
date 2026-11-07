@@ -116,7 +116,9 @@ test("every internal link and anchor points at something that exists", () => {
   for (const [path, page] of Object.entries(site.pages)) {
     const from = "/" + path.replace(/index\.html$/, "");
     for (const match of page.matchAll(/ href="(\/[^"]*|#[^"]+)"/g)) {
-      const [target, anchor] = match[1]!.startsWith("#") ? [from, match[1]!.slice(1)] : match[1]!.split("#");
+      const [target, rawAnchor] = match[1]!.startsWith("#") ? [from, match[1]!.slice(1)] : match[1]!.split("#");
+      // The planner keeps its team in the hash, so its links carry state, not anchors.
+      const anchor = target === "/planner/" ? undefined : rawAnchor;
       if (target!.startsWith("/f/") || target!.startsWith("/s/")) continue;
       if (!ids.has(target!)) broken.push(`${from} -> ${match[1]}`);
       else if (anchor && !ids.get(target!)!.has(anchor)) broken.push(`${from} -> ${match[1]} (no anchor)`);
