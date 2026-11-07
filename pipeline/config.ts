@@ -18,4 +18,5 @@ export const GZIP_BUDGETS: Record<string, number> = {
   "learnsets.json": 28_000,
   "trainers.json": 35_000,
   "encounters.json": 6_500,
+  "types.json": 500,
 };

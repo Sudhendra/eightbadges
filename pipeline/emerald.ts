@@ -4,6 +4,7 @@ import { extractEncounters } from "./extract/encounters.ts";
 import { extractItems, type ItemSource } from "./extract/items.ts";
 import { extractAbilities, extractLearnsets, extractMoves, extractSpecies } from "./extract/pokemon.ts";
 import { extractTrainers } from "./extract/trainers.ts";
+import { extractTypeChart } from "./extract/types.ts";
 import { extractWorld } from "./extract/world.ts";
 
 /** Reads the decomp and returns every output file's contents, keyed by file name. Pure apart from reading. */
@@ -42,5 +43,6 @@ export function buildEmerald(decompDir: string): Record<string, unknown> {
     "learnsets.json": learnsets,
     "trainers.json": trainers,
     "encounters.json": encounters,
+    "types.json": extractTypeChart(read),
   };
 }

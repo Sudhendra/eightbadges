@@ -12,20 +12,21 @@ if [ -z "$COMMIT" ]; then
   exit 1
 fi
 
-if [ "$(git -C "$DEST" rev-parse HEAD 2>/dev/null || true)" = "$COMMIT" ]; then
-  echo "Decomp already at $COMMIT"
-  exit 0
+if [ "$(git -C "$DEST" rev-parse HEAD 2>/dev/null || true)" != "$COMMIT" ]; then
+  rm -rf "$DEST"
+  mkdir -p "$DEST"
+  git -C "$DEST" init --quiet
+  git -C "$DEST" remote add origin https://github.com/pret/pokeemerald.git
+  git -C "$DEST" fetch --quiet --depth 1 --filter=blob:none origin "$COMMIT"
+  git -C "$DEST" update-ref HEAD "$COMMIT"
 fi
 
-rm -rf "$DEST"
-mkdir -p "$DEST"
-git -C "$DEST" init --quiet
-git -C "$DEST" remote add origin https://github.com/pret/pokeemerald.git
 git -C "$DEST" sparse-checkout set --no-cone \
   '/data/maps/**/map.json' \
   '/data/maps/**/scripts.inc' \
   '/data/scripts/*.inc' \
   '/include/constants/pokedex.h' \
+  '/src/battle_main.c' \
   '/src/data/battle_moves.h' \
   '/src/data/items.h' \
   '/src/data/trainers.h' \
@@ -42,6 +43,5 @@ git -C "$DEST" sparse-checkout set --no-cone \
   '/src/data/text/species_names.h' \
   '/src/data/text/move_names.h' \
   '/src/data/text/abilities.h'
-git -C "$DEST" fetch --quiet --depth 1 --filter=blob:none origin "$COMMIT"
-git -C "$DEST" checkout --quiet FETCH_HEAD
+git -C "$DEST" checkout --quiet --force HEAD
 echo "Decomp ready at $(git -C "$DEST" rev-parse HEAD)"

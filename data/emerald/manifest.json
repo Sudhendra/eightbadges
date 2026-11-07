@@ -10,7 +10,8 @@
     "items.json": 309,
     "learnsets.json": 386,
     "trainers.json": 854,
-    "encounters.json": 121
+    "encounters.json": 121,
+    "types.json": 17
   },
   "files": {
     "world.json": {
@@ -57,6 +58,11 @@
       "bytes": 98683,
       "gzip": 5603,
       "sha256": "08c5c189a8fdbb65f225a1f94825778f92ac355de9b7f84b42073bb56e155d9f"
+    },
+    "types.json": {
+      "bytes": 1411,
+      "gzip": 345,
+      "sha256": "bc3c221cf6c4bf3ccac48f7bd4f97f5ce9dc1048da6ddac7e4b597dbf0dd6a82"
     }
   }
 }

@@ -5,6 +5,7 @@ import { test } from "node:test";
 import { Dex } from "@pkmn/dex";
 import { OUTPUT_DIR } from "../config.ts";
 import type { Move, Species } from "../extract/pokemon.ts";
+import type { TypeChart } from "../extract/types.ts";
 
 /**
  * Checks our decomp extraction against Pokémon Showdown's Gen 3 data, an independently maintained source.
@@ -44,6 +45,23 @@ test("species stats, types and abilities match Showdown's Gen 3 data", () => {
     const ours = mon.abilities.map(compact).sort().join();
     if (ours !== theirs) differences.push(`${mon.id}: abilities ${ours} vs ${theirs}`);
   }
+  assert.deepEqual(differences, []);
+});
+
+test("the type chart matches Showdown's Gen 3 chart", () => {
+  const chart = load<TypeChart>("types.json");
+  const names = gen3.types.all().filter((type) => type.exists && type.name !== "Stellar" && type.name !== "Fairy");
+  const multipliers: Record<number, number> = { 0: 1, 1: 2, 2: 0.5, 3: 0 };
+  const differences: string[] = [];
+  for (const defending of names) {
+    for (const attacking of names) {
+      const code = defending.damageTaken[attacking.name];
+      const theirs = multipliers[code ?? 0];
+      const ours = chart[compact(attacking.name)]?.[compact(defending.name)] ?? 1;
+      if (ours !== theirs) differences.push(`${attacking.name} vs ${defending.name}: ${ours} vs ${theirs}`);
+    }
+  }
+  assert.equal(names.length, 17);
   assert.deepEqual(differences, []);
 });
 
