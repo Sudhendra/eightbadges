@@ -1,0 +1,62 @@
+{
+  "game": "emerald",
+  "decompCommit": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+  "counts": {
+    "world.json": 4,
+    "places.json": 498,
+    "species.json": 386,
+    "moves.json": 354,
+    "abilities.json": 77,
+    "items.json": 309,
+    "learnsets.json": 386,
+    "trainers.json": 854,
+    "encounters.json": 121
+  },
+  "files": {
+    "world.json": {
+      "bytes": 98406,
+      "gzip": 10046,
+      "sha256": "bc18ae85e2b091ed849f7408649274b4b9319d5e381ecdc3dd388f49a44f0a16"
+    },
+    "places.json": {
+      "bytes": 87194,
+      "gzip": 8699,
+      "sha256": "6a847f70bc10747cedf60aab487d1695f8d50e400d600449b9fbd03d3a2d5437"
+    },
+    "species.json": {
+      "bytes": 117559,
+      "gzip": 18423,
+      "sha256": "dde9e6d3db3bcb8775a87c2b45ddd173541ee2470d6d2c60878654457d1fa4ed"
+    },
+    "moves.json": {
+      "bytes": 82453,
+      "gzip": 8670,
+      "sha256": "a4b3937d50283ee815369eba8f7df5f067f33eb1118e15b15ef4f63a726148ef"
+    },
+    "abilities.json": {
+      "bytes": 1885,
+      "gzip": 1142,
+      "sha256": "6b217012706cc48bba55ee91da4095c307bd0dd837202feb20a12946e6b8cd17"
+    },
+    "items.json": {
+      "bytes": 55147,
+      "gzip": 7608,
+      "sha256": "ce296a93b8f6bded6fd24865df49cf54e292bb232539cbb39e3859d35bcdcd92"
+    },
+    "learnsets.json": {
+      "bytes": 254626,
+      "gzip": 26072,
+      "sha256": "06c889dfb5428468a00dc977832ac8edd3b2d04a41a7f66ee60db4da8e756f34"
+    },
+    "trainers.json": {
+      "bytes": 308364,
+      "gzip": 31984,
+      "sha256": "9fd5cf86a4256e62a782a7ee7d72d85d75c3c0a39acad2244b511df344ddd8b2"
+    },
+    "encounters.json": {
+      "bytes": 98683,
+      "gzip": 5603,
+      "sha256": "08c5c189a8fdbb65f225a1f94825778f92ac355de9b7f84b42073bb56e155d9f"
+    }
+  }
+}
